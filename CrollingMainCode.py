@@ -18,11 +18,13 @@ print(loop_max)
 print(loop_max)
 readf.close()
 # 필요없으니 이제 닫아줌
-f = open('list.txt', 'w')
+
+f2 = open('1List.txt', 'w')
 print(loop_max)
 if loop_max == 0:
     # 없으면 새로 크롤링 해서 만듬
     print("파일이 없습니다.\n새로 생성합니다")
+    f = open('list.txt', 'w')
     for link in bsObject.findAll('div', {'class': 'CategoryTreeSection'}):
         # bsObjact 에서 div 안에있는 class가 CategoryTreeSection인걸 모두 찾는다
         first_links = link.findAll('span')
@@ -62,7 +64,6 @@ if loop_max == 0:
 
 if loop_max == 0:
     f1 = open('realList.txt', 'w')
-    f.close()
     # 저장한뒤 닫음
     f = open('list.txt', 'r')
     # 리스트를 정리하기 위해 연다
@@ -112,8 +113,19 @@ for a in range(a, loop_max):
                 f2.write(ke + '\n')
                 # 파일로 저장
                 a = a + 1
+
             # 없는것들도 있고 저번 코드에 오류가 생겨서 더 걸러줌
             # 2번째 유형 h1 태그에 바로 있는 유형
+            elif len(bsObject.findAll('span', {'class', 'mbox-text-span'})):
+                ke = bsObject.findAll('b')[1].text
+                # 근데 b태그 안에 a태그가 있는 문서는 다른 b태그 안에 a태그가 있는것들이 있다
+                # 첫번째 배열은 무조건 이름이라 첫번째껄 가져온다
+
+                # 그것을 정리해준다(태그를 다 땜)
+                print(ke)
+                f2.write(ke + '\n')
+                # 파일로 저장
+                a = a + 1
             elif len(bsObject.findAll('h1')[0].text) == 0:
                 ke = bsObject.findAll('h1')[0].text
                 # 바로 h1태그를 찾아서 택스트 추출후 1번째 배열을 가져온다(이 유형도 h1태그가 바로 첫번째임)
