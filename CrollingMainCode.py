@@ -13,7 +13,6 @@ readf = open("list.txt", 'r')
 loop_max = (len(readf.readlines()))
 # 파일의 줄을 읽음
 print(loop_max)
-f1 = open('realList.txt', 'w')
 # reallist.txt는 중복을 거른 리스트를 담고있다
 # 쓰기 모드로 파일을 염
 print(loop_max)
@@ -59,28 +58,31 @@ if loop_max == 0:
                             ke = ('https://ko.wikipedia.org' + tag.attrs['href'])
                             # 앞에서도 말했지만 링크는 href 태그 안에 있고 나온것은 /wiki같은 식으로 나와서 도메인을 붙여준다
                             print(ke, file=f)
-# 파일로 저장한다
-f.close()
-# 저장한뒤 닫음
-f = open('list.txt', 'r')
-# 리스트를 정리하기 위해 연다
-f2 = open('1List.txt', 'w')
-# 이름이 저장될 리스트 파일을 만들어 둔다
-# 파일 정리 과정
-prev = None
-for line in sorted(open('list.txt')):
-    # 파일을 열고 나열한다
-    line = line.strip()
-    # line 변수를 .strip 함수로 정렬한다
-    if prev is not None and not line.startswith(prev):
-        # 라인은 한줄이 되었고 중복된것을 제거한다
+                            # 파일로 저장한다
+
+if loop_max == 0:
+    f1 = open('realList.txt', 'w')
+    f.close()
+    # 저장한뒤 닫음
+    f = open('list.txt', 'r')
+    # 리스트를 정리하기 위해 연다
+    f2 = open('1List.txt', 'w')
+    # 이름이 저장될 리스트 파일을 만들어 둔다
+    # 파일 정리 과정
+    prev = None
+    for line in sorted(open('list.txt')):
+        # 파일을 열고 나열한다
+        line = line.strip()
+        # line 변수를 .strip 함수로 정렬한다
+        if prev is not None and not line.startswith(prev):
+            # 라인은 한줄이 되었고 중복된것을 제거한다
+            f1.write(prev + '\n')
+        # 중복된것을 저장한다
+        prev = line
+    if prev is not None:
+        # 똑같은게 없으면
         f1.write(prev + '\n')
-    # 중복된것을 저장한다
-    prev = line
-if prev is not None:
-    # 똑같은게 없으면
-    f1.write(prev + '\n')
-    # 바로 저장한다
+        # 바로 저장한다
 myFile = open('realList.txt', 'r')
 # 파일을 읽어 줄수를 확인하고 그 줄수만큼 반복시킴
 loop_max = (len(myFile.readlines()))
@@ -101,13 +103,13 @@ for a in range(a, loop_max):
             # 문서의 이름이 저장되있는 방식이 총 3개여서 3개를 써줫다
             if len(bsObject.findAll('b')[0].findAll('a')) == 0:
                 # 첫번째 유형 b태그 안에 자식으로 a태그가 있는것
-                ke = bsObject.findAll('p')
+                ke = bsObject.findAll('b')[0].text
                 # 근데 b태그 안에 a태그가 있는 문서는 다른 b태그 안에 a태그가 있는것들이 있다
                 # 첫번째 배열은 무조건 이름이라 첫번째껄 가져온다
-                k2 = ke.find('b')[0].text
+
                 # 그것을 정리해준다(태그를 다 땜)
-                print(k2)
-                f2.write(k2 + '\n')
+                print(ke)
+                f2.write(ke + '\n')
                 # 파일로 저장
                 a = a + 1
             # 없는것들도 있고 저번 코드에 오류가 생겨서 더 걸러줌
@@ -121,6 +123,7 @@ for a in range(a, loop_max):
                 a = a + 1
             # 3번째 유형 h1 태그가 아닌 span태그에 있는 유형
             elif len(bsObject.findAll('span')):
+                ke = bsObject.findAll('span')
                 # 바로다가 span 찾아서 추출 후 1번째 배열을 가져온다(이 유형은 span태그가 바로 처음)
                 print(ke[0].text)
                 f2.write(ke[0] + '\n')
