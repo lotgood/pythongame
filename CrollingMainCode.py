@@ -25,6 +25,7 @@ if loop_max == 0:
     # 없으면 새로 크롤링 해서 만듬
     print("파일이 없습니다.\n새로 생성합니다")
     f = open('list.txt', 'w')
+    loop_max = 1
     for link in bsObject.findAll('div', {'class': 'CategoryTreeSection'}):
         # bsObjact 에서 div 안에있는 class가 CategoryTreeSection인걸 모두 찾는다
         first_links = link.findAll('span')
@@ -54,24 +55,23 @@ if loop_max == 0:
                     if not tag.attrs['href'].startswith('#'):
                         # #으로 시작하는것은 문서가 아니니 문서 안에있는 이상한 링크를 1차로 지워준다
                         if not tag.attrs['href'].startswith('https://ko.wikipedia.org/http://') and tag.attrs[
-                            'href'].startswith("/wiki") and tag.attrs['href'].startwith("https://ko.wikipedia.org/wiki/"):
+                            'href'].startswith("/wiki") and tag.attrs['href'].startswith("https://ko.wikipedia.org/wiki/"):
                             # https://ko.wikipedia.org/http:/,/wiki으로 시작하는것은 문서가 아니니 문서 안에있는 이상한 링크를 2차로 지워준다
                             # 걸러진 문서를 저장한다(인물의 사이트가 아닌 2차로 거른것에서 한번 더 들어가 사건으로 가서 그것의 링크를 수집한다)
                             ke = ('https://ko.wikipedia.org' + tag.attrs['href'])
                             # 앞에서도 말했지만 링크는 href 태그 안에 있고 나온것은 /wiki같은 식으로 나와서 도메인을 붙여준다
                             print(ke, file=f)
                             # 파일로 저장한다
-
-if loop_max == 0:
+print(loop_max)
+if loop_max == 1:
     f1 = open('realList.txt', 'w')
     # 저장한뒤 닫음
     f = open('list.txt', 'r')
     # 리스트를 정리하기 위해 연다
-    f2 = open('1List.txt', 'w')
     # 이름이 저장될 리스트 파일을 만들어 둔다
     # 파일 정리 과정
     prev = None
-    for line in sorted(open('list.txt')):
+    for line in sorted(f):
         # 파일을 열고 나열한다
         line = line.strip()
         # line 변수를 .strip 함수로 정렬한다
