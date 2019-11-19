@@ -81,8 +81,8 @@ if prev is not None:
     # 똑같은게 없으면
     f1.write(prev + '\n')
     # 바로 저장한다
-    myFile = open('realList.txt', 'r')
-    # 파일을 읽어 줄수를 확인하고 그 줄수만큼 반복시킴
+myFile = open('realList.txt', 'r')
+# 파일을 읽어 줄수를 확인하고 그 줄수만큼 반복시킴
 loop_max = (len(myFile.readlines()))
 print(loop_max)
 a = 0
