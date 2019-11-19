@@ -54,7 +54,7 @@ if loop_max == 0:
                     if not tag.attrs['href'].startswith('#'):
                         # #으로 시작하는것은 문서가 아니니 문서 안에있는 이상한 링크를 1차로 지워준다
                         if not tag.attrs['href'].startswith('https://ko.wikipedia.org/http://') and tag.attrs[
-                            'href'].startswith("/wiki"):
+                            'href'].startswith("/wiki") and tag.attrs['href'].startwith("https://ko.wikipedia.org/wiki/"):
                             # https://ko.wikipedia.org/http:/,/wiki으로 시작하는것은 문서가 아니니 문서 안에있는 이상한 링크를 2차로 지워준다
                             # 걸러진 문서를 저장한다(인물의 사이트가 아닌 2차로 거른것에서 한번 더 들어가 사건으로 가서 그것의 링크를 수집한다)
                             ke = ('https://ko.wikipedia.org' + tag.attrs['href'])
