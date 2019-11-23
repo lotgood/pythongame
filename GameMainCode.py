@@ -1,4 +1,5 @@
 import time
+import sys
 myFile = open('1List.txt', 'r')
 loop_max = (len(myFile.readlines()))
 print(loop_max)
@@ -22,13 +23,23 @@ else:
         print("고려에 대한 간단한 설명이 있겠습니다.")
         time.sleep(1)
         print("고려는 918년 궁예를 축출하고 왕건이 즉위한 이후.\n1392년 이성계에 의해 멸망하기까지 한반도 대부분을 지배하였던 국가입니다.")
+        k = 0
+        myFile = open('1List.txt', 'r')
+        loop_max = (len(myFile.readlines()))
         f = open("1List.txt", 'r')
-        print(f)
+        line = f.readlines()
+        for a in range(k, loop_max):
+            print(line[k])
+            k = k+1
+        Aw = input("TEST")
+        if Aw == line[0]:
+            print("yee")
     elif a == 2:
         print("조선 시대를 선택하셨네요.")
         print("조선에 대한 간단한 설명이 있겠습니다.")
         time.sleep(1)
-        print("조선은 유학을 통치 이념으로 삼아 한반도를 518년 간 다스렸던 왕조입니다.\n고려 말 신진 사대부의 지지를 등에 업어 무관 이성계가 건국하였고, 고종이 선포한 대한제국으로 계승되었습니다.")
+        print("조선은 유학을 통치 이념으로 삼아 한반도를 518년 간 다스렸던 왕조입니다.\n고려 말 신진 사대부의 지지를 등에 업어 무관 이성계가 건국하였고, 고종이 선포한 대한제국으로 "
+              "계승되었습니다.")
         f = open("2List.txt", 'r')
     elif a == 3:
         print("대한제국을 선택하셨네요.")
@@ -45,7 +56,8 @@ else:
         print("일제 강점기에 대한 간단한 설명이 있겠습니다.")
         time.sleep(1)
         print(
-            "일제 강점기는 1910년 8월 29일 ~ 1945년 8월 15일 동안 일본 제국의 식민지로서 일본령 조선이 존재했던 기간을 가리킵니다.\n일제강점기는 한국의 역사에서 한국의 근현대사를 시대별로 "
+            "일제 강점기는 1910년 8월 29일 ~ 1945년 8월 15일 동안 일본 제국의 식민지로서 일본령 조선이 존재했던 기간을 가리킵니다.\n일제강점기는 한국의 역사에서 한국의 근현대사를 "
+            "시대별로 "
             "나누었을 때 약 35년 간 이어진 주요 시대 중 하나입니다.")
         f = open("4List.txt", 'r')
 
