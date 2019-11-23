@@ -23,17 +23,7 @@ else:
         print("고려에 대한 간단한 설명이 있겠습니다.")
         time.sleep(1)
         print("고려는 918년 궁예를 축출하고 왕건이 즉위한 이후.\n1392년 이성계에 의해 멸망하기까지 한반도 대부분을 지배하였던 국가입니다.")
-        k = 0
-        myFile = open('1List.txt', 'r')
-        loop_max = (len(myFile.readlines()))
-        f = open("1List.txt", 'r')
-        line = f.readlines()
-        for a in range(k, loop_max):
-            print(line[k])
-            k = k+1
-        Aw = input("TEST")
-        if Aw == line[0]:
-            print("yee")
+
     elif a == 2:
         print("조선 시대를 선택하셨네요.")
         print("조선에 대한 간단한 설명이 있겠습니다.")
